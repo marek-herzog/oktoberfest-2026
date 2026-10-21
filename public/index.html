@@ -78,7 +78,7 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .yr{margin-left:calc(var(--u)*.8);font-weight:400;font-size:.62em;color:var(--muted)}
 .time,.hlist .t{font-family:var(--display);color:var(--amber);font-variant-numeric:tabular-nums;font-size:1.1em}
 .row.top:first-child .time{color:var(--gold)}
-.empty{color:var(--muted);border-bottom:0!important}
+.empty{display:flex!important;align-items:center;color:var(--muted);font-size:calc(var(--u)*2.6);border-bottom:0!important}
 .foot{flex:none;display:flex;justify-content:space-between;gap:calc(var(--u)*2);padding-top:calc(var(--u)*1.2);font-size:calc(var(--u)*1.6);color:var(--muted)}
 .foot strong{color:var(--white)}
 .legal{flex:none;margin:0;padding:calc(var(--u)*.8) calc(var(--u)*4);font-size:calc(var(--u)*1.25);color:var(--muted);text-align:center}
@@ -171,7 +171,7 @@ h1,h2,h3{text-wrap:balance;margin:0}
     </section>
   </main>
   <div class="rauten" aria-hidden="true"></div>
-  <p class="legal">Prost ! Santé ! Les temps marqués 2025 viennent de l'édition précédente. À consommer avec modération.</p>
+  <p class="legal">Prost ! Santé ! À consommer avec modération.</p>
 </div>
 <script>
 (function(){
@@ -241,7 +241,7 @@ h1,h2,h3{text-wrap:balance;margin:0}
     if (!timer) timer = setInterval(tick, 1000);
   }
   // fallback copy so the page still renders if data.json cannot be fetched (e.g. opened via file://)
-  const FALLBACK = {"event": {"start": "2026-10-21T20:00:00+02:00", "label": "Mercredi 21 octobre · dès 20h00"}, "records": [{"n": "Lukas", "s": 252, "y": 2025}, {"n": "Camille", "s": 227, "y": 2025}, {"n": "Matteo", "s": 211, "y": 2025}, {"n": "Inès", "s": 185, "y": 2025}, {"n": "Jonas", "s": 168, "y": 2025}, {"n": "Hugo", "s": 140, "y": 2025}, {"n": "Léa", "s": 118, "y": 2025}, {"n": "Jared", "s": 5, "y": 2026}], "honor": [{"n": "Baptiste", "s": 12.4, "y": 2025}, {"n": "Chloé", "s": 13.9, "y": 2025}]};
+  const FALLBACK = {"event": {"start": "2026-10-21T20:00:00+02:00", "label": "Mercredi 21 octobre · dès 20h00"}, "records": [], "honor": []};
   load();
   setInterval(load, 30000); // pick up new times without a manual reload
 })();

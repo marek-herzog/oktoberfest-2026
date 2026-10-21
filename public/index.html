@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Oktoberfest 2026 · Musée</title>
+<meta name="description" content="Oktoberfest au Musée, mercredi 21 octobre dès 20h00. Maß + bretzel 6 €, pinte 3,50 €, Maßkrugstemmen.">
+<meta name="theme-color" content="#0d1b2f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%BA%3C/text%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link id="fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style id="app-style">
+/* Layout: compact night-tent page; lozenge bands frame a mug + countdown hero, a price strip, then honour list (left, narrow) beside the Stemmen leaderboard */
+:root{
+  --night:#0d1b2f; --tent:#15294a; --line:#2a4470;
+  --blue:#2f80d6; --white:#f3f6fb; --muted:#a9b8d0;
+  --amber:#f3a91c; --foam:#fff7e3; --pretzel:#b56a2c; --gold:#ffd25e;
+  --display:"Alfa Slab One",Rockwell,"Roboto Slab",Georgia,serif;
+  --body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;
+}
+body{background:var(--night);color:var(--white);font-family:var(--body);font-size:16px;line-height:1.45}
+.wrap{max-width:920px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.rauten{height:20px;background-color:var(--white);
+  background-image:linear-gradient(60deg,var(--blue) 25%,transparent 25.5%,transparent 75%,var(--blue) 75.5%),
+                   linear-gradient(120deg,var(--blue) 25%,transparent 25.5%,transparent 75%,var(--blue) 75.5%);
+  background-size:24px 40px}
+h1,h2,h3,.num{font-family:var(--display);font-weight:400;letter-spacing:.01em}
+h1,h2,h3{text-wrap:balance;margin:0}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;font-weight:700;color:var(--amber)}
+.muted{color:var(--muted)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(14px,4vw,36px);align-items:center;padding-block:22px}
+.mug{width:clamp(72px,14vw,120px);max-width:100%}
+.hero h1{font-size:clamp(2.1rem,7vw,3.8rem);line-height:.95;color:var(--foam);margin-top:4px}
+.when{margin:8px 0 12px;font-weight:600;font-size:1.05rem}
+.cd{display:flex;flex-wrap:wrap;gap:8px}
+.unit{background:var(--tent);border:1px solid var(--line);border-radius:8px;min-width:64px;padding:6px 10px 5px;text-align:center}
+.unit .num{display:block;font-size:clamp(1.6rem,5.5vw,2.4rem);line-height:1;color:var(--amber);font-variant-numeric:tabular-nums}
+.unit small{display:block;margin-top:2px;text-transform:uppercase;letter-spacing:.12em;font-size:.64rem;color:var(--muted)}
+.live{margin:0;font-family:var(--display);font-size:clamp(1.5rem,5vw,2.2rem);color:var(--gold)}
+
+/* prices */
+section{padding-block:24px}
+.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px}
+.price{display:flex;gap:14px;align-items:center;padding:12px 16px;border-radius:10px;background:var(--tent)}
+.price svg{flex:none;width:40px;height:40px}
+.price .what{flex:1;min-width:0}
+.price h3{font-size:1.15rem;color:var(--foam)}
+.price p{margin:0;font-size:.88rem;color:var(--muted)}
+.price .eur{font-family:var(--display);font-size:1.7rem;color:var(--amber);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* boards */
+.boards{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr);gap:28px;align-items:start}
+.honor{padding:14px;border:1px solid var(--line);border-radius:10px;font-size:.9rem}
+.honor h3{font-size:1.05rem;color:var(--gold);margin-top:4px}
+.honor > p{margin:4px 0 10px;color:var(--muted)}
+.hlist{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.hlist li{display:flex;gap:8px;align-items:baseline}
+.hlist .n{flex:1;min-width:0;overflow-wrap:anywhere;font-weight:600}
+.hlist .t{color:var(--amber);font-variant-numeric:tabular-nums;font-weight:700}
+.stemmen h2{font-size:clamp(1.5rem,5vw,2.1rem);color:var(--foam);margin-top:4px}
+.stemmen > p{margin:4px 0 0}
+.rules{display:flex;flex-wrap:wrap;gap:4px 16px;margin:8px 0 14px;padding:0;list-style:none;color:var(--muted);font-size:.9rem}
+.rules li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--amber);margin-right:7px;vertical-align:middle}
+.board{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:34px minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:7px 2px;border-bottom:1px solid var(--line)}
+.rank{font-family:var(--display);font-size:1.05rem;color:var(--muted);text-align:center}
+.row.top .rank{color:var(--night);background:var(--gold);border-radius:50%;width:28px;height:28px;line-height:28px;font-size:.95rem;justify-self:center}
+.row.top:nth-child(2) .rank{background:#c9d3e2}
+.row.top:nth-child(3) .rank{background:var(--pretzel);color:var(--foam)}
+.who{min-width:0;overflow-wrap:anywhere;font-weight:600}
+.yr{margin-left:6px;font-weight:400;font-size:.75rem;color:var(--muted)}
+.time{font-family:var(--display);font-size:1.15rem;color:var(--amber);font-variant-numeric:tabular-nums}
+.row.top:first-child .time{color:var(--gold)}
+.del{background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:2px 7px;font:inherit;font-size:.75rem;cursor:pointer}
+.hlist .del{padding:0 5px}
+.del:hover,.del:focus-visible{color:var(--white);border-color:var(--white)}
+.empty{color:var(--muted);padding:10px 2px}
+.challenge{margin:12px 0 0;font-weight:600}
+
+/* admin (unused in static build) */
+.admin{margin-top:16px;padding:14px;border:1px dashed var(--amber);border-radius:10px}
+.admin form{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;margin-top:6px}
+.admin label{display:flex;flex-direction:column;gap:3px;font-size:.78rem;color:var(--muted)}
+.admin input,.admin select{background:var(--night);color:var(--white);border:1px solid var(--line);border-radius:7px;padding:8px 9px;font:inherit;font-size:.95rem;width:10rem;max-width:100%}
+.admin input#t-time{width:6.5rem}
+.admin button[type=submit]{background:var(--amber);color:var(--night);border:0;border-radius:7px;padding:9px 14px;font:inherit;font-weight:700;cursor:pointer}
+.admin .msg{margin:6px 0 0;font-size:.85rem;color:var(--muted);min-height:1.2em}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+footer{padding-block:16px;color:var(--muted);font-size:.85rem}
+
+@media (max-width:640px){
+  .boards{grid-template-columns:minmax(0,1fr);gap:18px}
+  .honor{order:2}
+  .unit{min-width:0;flex:1 1 0}
+  .row{grid-template-columns:30px minmax(0,1fr) auto}
+  .row .del{grid-column:2/-1;justify-self:start}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="rauten" aria-hidden="true"></div>
+  <header class="wrap hero">
+    <svg class="mug" viewBox="0 0 120 150" role="img" aria-label="Chope qui se remplit jusqu'à l'ouverture">
+      <defs><clipPath id="glass"><path d="M14 22 H86 V136 Q86 144 78 144 H22 Q14 144 14 136 Z"/></clipPath></defs>
+      <g clip-path="url(#glass)">
+        <rect x="0" y="0" width="120" height="150" fill="#0a1526"/>
+        <rect id="beer" x="0" y="144" width="120" height="150" fill="#f3a91c"/>
+        <rect id="foam" x="0" y="132" width="120" height="14" fill="#fff7e3"/>
+      </g>
+      <path d="M86 46 H100 Q110 46 110 58 V100 Q110 112 100 112 H86" fill="none" stroke="#f3f6fb" stroke-width="7"/>
+      <path d="M14 22 H86 V136 Q86 144 78 144 H22 Q14 144 14 136 Z" fill="none" stroke="#f3f6fb" stroke-width="5"/>
+      <line x1="20" y1="36" x2="40" y2="36" stroke="#f3f6fb" stroke-width="2"/>
+      <text x="44" y="39" fill="#f3f6fb" font-size="9" font-family="Barlow,Arial">1,0 L</text>
+      <g stroke="#f3f6fb" stroke-opacity=".35" stroke-width="3"><line x1="30" y1="50" x2="30" y2="130"/><line x1="50" y1="50" x2="50" y2="130"/><line x1="70" y1="50" x2="70" y2="130"/></g>
+    </svg>
+    <div>
+      <div class="eyebrow">Oktoberfest 2026 - Musée</div>
+      <h1>O'zapft is !</h1>
+      <p class="when" data-when></p>
+      <div class="cd" data-cd aria-live="off">
+        <div class="unit" data-dunit><span class="num" data-d>0</span><small>Jours</small></div>
+        <div class="unit"><span class="num" data-h>00</span><small>Heures</small></div>
+        <div class="unit"><span class="num" data-m>00</span><small>Min</small></div>
+        <div class="unit"><span class="num" data-s>00</span><small>Sec</small></div>
+      </div>
+      <p class="live" data-live hidden>C'est parti ! Rendez-vous sous la tente.</p>
+    </div>
+  </header>
+  <div class="rauten" aria-hidden="true"></div>
+
+  <section class="wrap">
+    <div class="prices">
+      <div class="price">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><rect x="10" y="12" width="28" height="36" rx="3" fill="#f3a91c"/><rect x="10" y="8" width="28" height="9" rx="4" fill="#fff7e3"/><path d="M38 20 H44 Q48 20 48 25 V35 Q48 40 44 40 H38" fill="none" stroke="#f3f6fb" stroke-width="3"/></svg>
+        <div class="what"><h3>Maß + bretzel</h3><p>La vraie chope d'un litre, avec un bretzel frais.</p></div>
+        <span class="eur">6 €</span>
+      </div>
+      <div class="price">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M16 12 H40 L37 48 H19 Z" fill="#f3a91c"/><path d="M15 8 H41 L40 16 H16 Z" fill="#fff7e3"/></svg>
+        <div class="what"><h3>Pinte</h3><p>Un demi-litre, pour commencer en douceur.</p></div>
+        <span class="eur">3,50 €</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap boards">
+    <aside class="honor">
+      <div class="eyebrow">Membres d'honneur</div>
+      <h3>Cul sec en moins de 15 s</h3>
+      <p>Une Maß entière bue en moins de 15 secondes.</p>
+      <ul class="hlist" data-honor></ul>
+    </aside>
+    <div class="stemmen">
+      <div class="eyebrow">Compétition</div>
+      <h2>Maßkrugstemmen</h2>
+      <p class="muted">Qui tient la chope d'un litre le plus longtemps, bras tendu ?</p>
+      <ul class="rules">
+        <li>Chope pleine, environ 2,3 kg</li>
+        <li>Bras tendu à l'horizontale</li>
+        <li>Le bras baisse ou la bière déborde : chrono arrêté</li>
+      </ul>
+      <ol class="board" data-board></ol>
+      <p class="challenge">Tu peux battre le record ? On tient les chopes ce soir, en direct.</p>
+    </div>
+  </section>
+  <div class="rauten" aria-hidden="true"></div>
+  <footer class="wrap">Prost ! Santé ! Les temps marqués 2025 viennent de l'édition précédente. À consommer avec modération.</footer>
+</div>
+<script>
+(function(){
+  const root = document.getElementById('root');
+  const $ = s => root.querySelector(s);
+  const pad = n => String(n).padStart(2,'0');
+  const fmt = s => Math.floor(s/60) + ':' + pad(Math.round(s%60));
+  const fmtSec = s => s.toFixed(1).replace('.', ',') + ' s';
+  let state = null, timer = null;
+
+  // countdown: mug fills up during the last 7 days before start
+  const WEEK = 7*24*3600*1000;
+  function setFill(f){
+    const top = 144 - f*(144-40);
+    document.getElementById('beer').setAttribute('y', top);
+    document.getElementById('foam').setAttribute('y', top-12);
+  }
+  function tick(){
+    const diff = new Date(state.event.start).getTime() - Date.now();
+    if (diff <= 0){ $('[data-cd]').hidden = true; $('[data-live]').hidden = false; setFill(1); return; }
+    const s = Math.floor(diff/1000), d = Math.floor(s/86400);
+    $('[data-dunit]').hidden = d === 0;
+    $('[data-d]').textContent = d;
+    $('[data-h]').textContent = pad(Math.floor(s%86400/3600));
+    $('[data-m]').textContent = pad(Math.floor(s%3600/60));
+    $('[data-s]').textContent = pad(s%60);
+    setFill(Math.min(1, Math.max(0.08, 1 - diff/WEEK)));
+  }
+
+  function renderBoard(){
+    const list = $('[data-board]'); list.textContent = '';
+    const rows = (state.records || []).slice().sort((a,b) => b.s - a.s);
+    if (!rows.length){ const li = document.createElement('li'); li.className='empty'; li.textContent='Pas encore de temps. Sois le premier ou la première au tableau.'; list.appendChild(li); return; }
+    rows.forEach((r,i) => {
+      const li = document.createElement('li'); li.className = 'row' + (i < 3 ? ' top' : '');
+      const rank = document.createElement('span'); rank.className='rank'; rank.textContent = i+1;
+      const who = document.createElement('span'); who.className='who'; who.textContent = r.n;
+      const yr = document.createElement('span'); yr.className='yr'; yr.textContent = r.y; who.appendChild(yr);
+      const t = document.createElement('span'); t.className='time'; t.textContent = fmt(r.s);
+      li.append(rank, who, t); list.appendChild(li);
+    });
+  }
+  function renderHonor(){
+    const list = $('[data-honor]'); list.textContent = '';
+    const rows = (state.honor || []).slice().sort((a,b) => a.s - b.s);
+    if (!rows.length){ const li = document.createElement('li'); li.className='muted'; li.textContent='Personne pour l’instant.'; list.appendChild(li); return; }
+    rows.forEach(r => {
+      const li = document.createElement('li');
+      const n = document.createElement('span'); n.className='n'; n.textContent = r.n;
+      const yr = document.createElement('span'); yr.className='yr'; yr.textContent = r.y; n.appendChild(yr);
+      const t = document.createElement('span'); t.className='t'; t.textContent = fmtSec(r.s);
+      li.append(n, t); list.appendChild(li);
+    });
+  }
+
+  async function load(){
+    try {
+      const res = await fetch('data.json?t=' + Date.now(), {cache:'no-store'});
+      if (!res.ok) throw new Error(res.status);
+      state = await res.json();
+    } catch(e){
+      if (!state) state = FALLBACK;
+    }
+    $('[data-when]').textContent = state.event.label;
+    renderBoard(); renderHonor(); tick();
+    if (!timer) timer = setInterval(tick, 1000);
+  }
+  // fallback copy so the page still renders if data.json cannot be fetched (e.g. opened via file://)
+  const FALLBACK = {"event": {"start": "2026-10-21T20:00:00+02:00", "label": "Mercredi 21 octobre · dès 20h00"}, "records": [{"n": "Lukas", "s": 252, "y": 2025}, {"n": "Camille", "s": 227, "y": 2025}, {"n": "Matteo", "s": 211, "y": 2025}, {"n": "Inès", "s": 185, "y": 2025}, {"n": "Jonas", "s": 168, "y": 2025}, {"n": "Hugo", "s": 140, "y": 2025}, {"n": "Léa", "s": 118, "y": 2025}, {"n": "Jared", "s": 5, "y": 2026}], "honor": [{"n": "Baptiste", "s": 12.4, "y": 2025}, {"n": "Chloé", "s": 13.9, "y": 2025}]};
+  load();
+  setInterval(load, 30000); // pick up new times without a manual reload
+})();
+</script>
+</body>
+</html>

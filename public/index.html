@@ -82,6 +82,9 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .yr{margin-left:calc(var(--u)*.8);font-weight:400;font-size:.62em;color:var(--muted)}
 .time,.hlist .t{font-family:var(--display);color:var(--amber);font-variant-numeric:tabular-nums;font-size:1.1em}
 .row.top:first-child .time{color:var(--gold)}
+.star{color:var(--gold)}
+.hlist li:not(.member) .t{color:var(--muted)}
+.hlist li.member .t{color:var(--gold)}
 .empty{display:flex!important;align-items:center;color:var(--muted);font-size:calc(var(--u)*2.6);border-bottom:0!important}
 .foot{flex:none;display:flex;justify-content:space-between;gap:calc(var(--u)*2);padding-top:calc(var(--u)*1.2);font-size:calc(var(--u)*1.6);color:var(--muted)}
 .foot strong{color:var(--white)}
@@ -167,9 +170,9 @@ h1,h2,h3{text-wrap:balance;margin:0}
       <div class="foot"><span><strong>Tu peux battre le record ?</strong> On tient les chopes ce soir, en direct.</span></div>
     </section>
     <section class="panel honor">
-      <div class="eyebrow">Membres d'honneur</div>
-      <h2>Cul sec en moins de 15 s</h2>
-      <p class="sub">Une Maß entière bue en moins de 15 secondes.</p>
+      <div class="eyebrow">Cul sec · Maß entière</div>
+      <h2>Cul sec</h2>
+      <p class="sub"><span class="star">★</span> Moins de 15 s : membre d'honneur.</p>
       <ul class="hlist" data-honor></ul>
     </section>
   </main>
@@ -224,8 +227,10 @@ h1,h2,h3{text-wrap:balance;margin:0}
     const rows = (state.honor || []).slice().sort((a,b) => a.s - b.s);
     if (!rows.length){ const li = document.createElement('li'); li.className='empty'; li.textContent='Personne pour l’instant.'; list.appendChild(li); return; }
     rows.forEach(r => {
-      const li = document.createElement('li');
+      // every time is listed; only sub-15 s earns the honour star
+      const li = document.createElement('li'); li.className = r.s < 15 ? 'member' : '';
       const n = document.createElement('span'); n.className='n'; n.textContent = r.n;
+      if (r.s < 15){ const star = document.createElement('span'); star.className='star'; star.textContent='★ '; n.prepend(star); }
       const yr = document.createElement('span'); yr.className='yr'; yr.textContent = r.y; n.appendChild(yr);
       const t = document.createElement('span'); t.className='t'; t.textContent = fmtSec(r.s);
       li.append(n, t); list.appendChild(li);

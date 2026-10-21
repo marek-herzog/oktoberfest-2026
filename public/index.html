@@ -232,6 +232,7 @@ h1,h2,h3{text-wrap:balance;margin:0}
       const n = document.createElement('span'); n.className='n'; n.textContent = r.n;
       if (r.s < 15){ const star = document.createElement('span'); star.className='star'; star.textContent='★ '; n.prepend(star); }
       const yr = document.createElement('span'); yr.className='yr'; yr.textContent = r.y; n.appendChild(yr);
+      if (r.note){ const note = document.createElement('span'); note.className='yr'; note.textContent = '· ' + r.note; n.appendChild(note); }
       const t = document.createElement('span'); t.className='t'; t.textContent = fmtSec(r.s);
       li.append(n, t); list.appendChild(li);
     });

@@ -70,8 +70,7 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .rules li::before{content:"";display:inline-block;width:calc(var(--u)*.7);height:calc(var(--u)*.7);border-radius:50%;background:var(--amber);margin-right:calc(var(--u)*.8);vertical-align:middle}
 
 .board,.hlist{flex:1;min-height:0;list-style:none;margin:0;padding:0;border-top:1px solid var(--line);display:grid;grid-template-rows:repeat(10,minmax(0,1fr))}
-/* both lists fill 10 rows, then continue in a second column (Stemmen: places 11–20) */
-.board,.hlist{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);column-gap:calc(var(--u)*3)}
+.hlist{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);column-gap:calc(var(--u)*3)}
 .row,.hlist li{display:grid;align-items:center;gap:calc(var(--u)*1.4);padding:0 calc(var(--u)*.4);border-bottom:1px solid var(--line);font-size:calc(var(--u)*2.6);min-height:0}
 .row{grid-template-columns:calc(var(--u)*4) minmax(0,1fr) auto}
 .hlist li{grid-template-columns:minmax(0,1fr) auto}
@@ -84,6 +83,9 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .time,.hlist .t{font-family:var(--display);color:var(--amber);font-variant-numeric:tabular-nums;font-size:1.1em}
 .row.top:first-child .time{color:var(--gold)}
 .star{color:var(--gold)}
+.split{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:calc(var(--u)*3)}
+.col{display:flex;flex-direction:column;min-height:0}
+.col h3{font-size:calc(var(--u)*2.4);color:var(--foam);margin-bottom:calc(var(--u)*.6)}
 .hlist li:not(.member) .t{color:var(--muted)}
 .hlist li.member .t{color:var(--gold)}
 .empty{display:flex!important;align-items:center;color:var(--muted);font-size:calc(var(--u)*2.6);border-bottom:0!important}
@@ -105,7 +107,8 @@ h1,h2,h3{text-wrap:balance;margin:0}
   .cd{flex-wrap:wrap}
   .unit{min-width:0;flex:1 1 0}
   .board,.hlist{grid-template-rows:none;grid-auto-rows:calc(var(--u)*6)}
-  .board,.hlist{grid-auto-flow:row}
+  .hlist{grid-auto-flow:row}
+  .split{grid-template-columns:minmax(0,1fr);gap:calc(var(--u)*2.4)}
   .foot{flex-direction:column}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -160,14 +163,17 @@ h1,h2,h3{text-wrap:balance;margin:0}
 
   <main class="boards pad">
     <section class="panel stemmen">
-      <div class="eyebrow">Compétition · Top 20</div>
+      <div class="eyebrow">Compétition · Top 10</div>
       <h2>Maßkrugstemmen</h2>
       <ul class="sub rules">
         <li>Chope pleine, environ 2,3 kg</li>
         <li>Bras tendu à l'horizontale</li>
         <li>Le bras baisse ou la bière déborde : chrono arrêté</li>
       </ul>
-      <ol class="board" data-board></ol>
+      <div class="split">
+        <div class="col"><h3>Hommes</h3><ol class="board" data-board="m"></ol></div>
+        <div class="col"><h3>Femmes</h3><ol class="board" data-board="f"></ol></div>
+      </div>
       <div class="foot"><span><strong>Tu peux battre le record ?</strong> On tient les chopes ce soir, en direct.</span></div>
     </section>
     <section class="panel honor">
@@ -188,7 +194,7 @@ h1,h2,h3{text-wrap:balance;margin:0}
   const pad = n => String(n).padStart(2,'0');
   const fmt = s => Math.floor(s/60) + ':' + pad(Math.round(s%60));
   const fmtSec = s => s.toFixed(1).replace('.', ',') + ' s';
-  const TOP = 20;
+  const TOP = 10;
   let state = null, timer = null;
 
   // countdown: mug fills up during the last 7 days before start
@@ -210,10 +216,12 @@ h1,h2,h3{text-wrap:balance;margin:0}
     setFill(Math.min(1, Math.max(0.08, 1 - diff/WEEK)));
   }
 
-  function renderBoard(){
-    const list = $('[data-board]'); list.textContent = '';
-    const rows = (state.records || []).slice().sort((a,b) => b.s - a.s).slice(0, TOP);
-    if (!rows.length){ const li = document.createElement('li'); li.className='empty'; li.textContent='Pas encore de temps. Sois le premier ou la première au tableau.'; list.appendChild(li); return; }
+  function renderBoard(){ renderSide('m'); renderSide('f'); }
+  // men and women ("g": "f") each get their own top 10
+  function renderSide(g){
+    const list = $('[data-board="' + g + '"]'); list.textContent = '';
+    const rows = (state.records || []).filter(r => (r.g === 'f' ? 'f' : 'm') === g).sort((a,b) => b.s - a.s).slice(0, TOP);
+    if (!rows.length){ const li = document.createElement('li'); li.className='empty'; li.textContent='Pas encore de temps.'; list.appendChild(li); return; }
     rows.forEach((r,i) => {
       const li = document.createElement('li'); li.className = 'row' + (i < 3 ? ' top' : '');
       const rank = document.createElement('span'); rank.className='rank'; rank.textContent = i+1;

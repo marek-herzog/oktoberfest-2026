@@ -70,7 +70,8 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .rules li::before{content:"";display:inline-block;width:calc(var(--u)*.7);height:calc(var(--u)*.7);border-radius:50%;background:var(--amber);margin-right:calc(var(--u)*.8);vertical-align:middle}
 
 .board,.hlist{flex:1;min-height:0;list-style:none;margin:0;padding:0;border-top:1px solid var(--line);display:grid;grid-template-rows:repeat(10,minmax(0,1fr))}
-.hlist{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);column-gap:calc(var(--u)*3)}
+/* both lists fill 10 rows, then continue in a second column (Stemmen: places 11–20) */
+.board,.hlist{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);column-gap:calc(var(--u)*3)}
 .row,.hlist li{display:grid;align-items:center;gap:calc(var(--u)*1.4);padding:0 calc(var(--u)*.4);border-bottom:1px solid var(--line);font-size:calc(var(--u)*2.6);min-height:0}
 .row{grid-template-columns:calc(var(--u)*4) minmax(0,1fr) auto}
 .hlist li{grid-template-columns:minmax(0,1fr) auto}
@@ -104,7 +105,7 @@ h1,h2,h3{text-wrap:balance;margin:0}
   .cd{flex-wrap:wrap}
   .unit{min-width:0;flex:1 1 0}
   .board,.hlist{grid-template-rows:none;grid-auto-rows:calc(var(--u)*6)}
-  .hlist{grid-auto-flow:row}
+  .board,.hlist{grid-auto-flow:row}
   .foot{flex-direction:column}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -159,7 +160,7 @@ h1,h2,h3{text-wrap:balance;margin:0}
 
   <main class="boards pad">
     <section class="panel stemmen">
-      <div class="eyebrow">Compétition · Top 10</div>
+      <div class="eyebrow">Compétition · Top 20</div>
       <h2>Maßkrugstemmen</h2>
       <ul class="sub rules">
         <li>Chope pleine, environ 2,3 kg</li>
@@ -187,7 +188,7 @@ h1,h2,h3{text-wrap:balance;margin:0}
   const pad = n => String(n).padStart(2,'0');
   const fmt = s => Math.floor(s/60) + ':' + pad(Math.round(s%60));
   const fmtSec = s => s.toFixed(1).replace('.', ',') + ' s';
-  const TOP = 10;
+  const TOP = 20;
   let state = null, timer = null;
 
   // countdown: mug fills up during the last 7 days before start
